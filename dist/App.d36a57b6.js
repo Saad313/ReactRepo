@@ -31535,7 +31535,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _pet = require("@frontendmasters/pet");
+var _pet = _interopRequireWildcard(require("@frontendmasters/pet"));
 
 var _DropDownCustom = _interopRequireDefault(require("./DropDownCustom"));
 
@@ -31576,10 +31576,24 @@ var searchLocation = function searchLocation() {
       AnimalDropDown = _useDropDown2[1];
 
   var _useDropDown3 = (0, _DropDownCustom.default)('Breed', '', breeds),
-      _useDropDown4 = _slicedToArray(_useDropDown3, 2),
+      _useDropDown4 = _slicedToArray(_useDropDown3, 3),
       breed = _useDropDown4[0],
-      BreedDropDown = _useDropDown4[1];
+      BreedDropDown = _useDropDown4[1],
+      setbreed = _useDropDown4[2];
 
+  (0, _react.useEffect)(function () {
+    setBreeds([]);
+    setbreed('');
+
+    _pet.default.breeds(animal).then(function (_ref) {
+      var breeds = _ref.breeds;
+      var breedString = breeds.map(function (_ref2) {
+        var name = _ref2.name;
+        return name;
+      });
+      setBreeds(breedString);
+    }, console.error);
+  }, [animal, setbreed, setBreeds]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "search-params"
   }, /*#__PURE__*/_react.default.createElement("h1", null, location), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("label", {
@@ -31647,7 +31661,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52274" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "28415" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
